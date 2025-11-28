@@ -19,7 +19,7 @@ export interface AuthResponse {
       email: string;
       name: string;
       role: string;
-      phone?: string;
+      phone?: string | null;
     };
     token: string;
   };
