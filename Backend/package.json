@@ -3,10 +3,10 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
-    "build": "prisma generate && tsc && node scripts/fix-prisma-imports.js",
+    "build": "prisma generate && node scripts/fix-prisma-imports.js && tsc",
     "start:prod": "node dist/server.js",
     "seed": "tsx prisma/seed.ts",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && node scripts/fix-prisma-imports.js"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
