@@ -68,10 +68,6 @@ logs/
 
 # If using Prisma client in Node:
 prisma/client/
-# Keep generated Prisma files for deployment (must come after any patterns that might ignore it)
-!Backend/
-!Backend/generated/
-!Backend/generated/**
 
 # -------------------------------------------------
 # Uploads / temp (optional)

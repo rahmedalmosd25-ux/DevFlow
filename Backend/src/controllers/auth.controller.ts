@@ -66,13 +66,7 @@ export const signUp = async (
       success: true,
       message: 'User created successfully',
       data: {
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-          phone: user.phone || undefined,
-        },
+        user,
         token,
       },
     });
@@ -223,13 +217,7 @@ export const updateProfile = async (
       success: true,
       message: 'Profile updated successfully',
       data: {
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-          phone: user.phone || undefined,
-        },
+        user,
         token: '', // Token remains the same, not regenerated
       },
     });

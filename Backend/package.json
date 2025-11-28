@@ -3,11 +3,9 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
-    "build": "prisma generate && tsc",
+    "build": "tsc",
     "start:prod": "node dist/server.js",
-    "seed": "tsx prisma/seed.ts",
-    "vercel-build": "prisma generate && tsc",
-    "postinstall": "prisma generate"
+    "seed": "tsx prisma/seed.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
