@@ -6,7 +6,8 @@
     "build": "prisma generate && tsc",
     "start:prod": "node dist/server.js",
     "seed": "tsx prisma/seed.ts",
-    "vercel-build": "prisma generate && tsc"
+    "vercel-build": "prisma generate && tsc",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
