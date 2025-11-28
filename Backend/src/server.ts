@@ -59,13 +59,18 @@ app.use((err: Error, req: Request, res: Response, next: express.NextFunction) =>
   });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`📝 Auth routes available at http://localhost:${PORT}/api/auth`);
-  console.log(`📅 Event routes available at http://localhost:${PORT}/api/events`);
-  console.log(`👑 Admin routes available at http://localhost:${PORT}/api/admin`);
-  console.log(`🎫 Ticket routes available at http://localhost:${PORT}/api/tickets`);
-  console.log(`📤 Upload routes available at http://localhost:${PORT}/api/upload`);
-});
+// Start server (only in non-serverless environments)
+if (process.env.VERCEL !== '1' && !process.env.VERCEL_ENV) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    console.log(`📝 Auth routes available at http://localhost:${PORT}/api/auth`);
+    console.log(`📅 Event routes available at http://localhost:${PORT}/api/events`);
+    console.log(`👑 Admin routes available at http://localhost:${PORT}/api/admin`);
+    console.log(`🎫 Ticket routes available at http://localhost:${PORT}/api/tickets`);
+    console.log(`📤 Upload routes available at http://localhost:${PORT}/api/upload`);
+  });
+}
+
+// Export app for Vercel serverless functions
+export default app;
 
