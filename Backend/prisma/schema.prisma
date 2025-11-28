@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client" // or `prisma-client-js`
+  output          = "../generated/prisma"
+  engineType      = "client" // enable Prisma ORM without Rust
+  previewFeatures = []
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EventCategory {
+  Party
+  Games
+  Traveling
+  Hiking
+  Conference
+  Festival
+}
+
+enum UserRole {
+  admin
+  user
+}
+
+enum EventStatus {
+  drafted
+  published
+}
+
+model User {
+  id       String   @id @default(uuid())
+  email    String   @unique
+  phone    String?
+  name     String
+  password String
+  role     UserRole @default(user)
+  tickets  Ticket[]
+  events   Event[]
+
+  @@map("users")
+}
+
+model Event {
+  id          String    @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  dateTime    DateTime
+  location    String
+  image       String?
+  category    EventCategory
+  status      EventStatus @default(drafted)
+  quantity    Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tickets     Ticket[]
+
+  @@map("events")
+}
+
+model Ticket {
+  id         String   @id @default(uuid())
+  userId     String
+  eventId    String
+  checkIn    Boolean  @default(false)
+  checkInAt  DateTime?
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("tickets")
+}
